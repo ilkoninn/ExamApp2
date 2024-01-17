@@ -1,0 +1,25 @@
+﻿@using App2.Business.ViewModels.ServiceVMs
+@model UpdateServiceVM
+
+<div class="container">
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Service Title</label>
+            <input asp-for="Title" class="form-control">
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Service Description</label>
+            <input asp-for="Description" class="form-control">
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="IconUrl" class="form-label">Service Icon Url</label>
+            <input asp-for="IconUrl" class="form-control">
+            <span asp-validation-for="IconUrl"></span>
+        </div>
+
+        <div asp-validation-summary=All></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,132 @@
+﻿@using App2.Core.Entities
+@model IQueryable<Service>
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Service Table</h1>
+
+<div asp-validation-summary=All></div>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 mb-4 mt-3">
+        <a asp-action="Create"><button type="button" class="btn btn-primary">Create</button></a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>N#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Icon</th>
+                        <th>Created Date</th>
+                        <th>Updated Date</th>
+                        <th>CRUD</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>N#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Icon</th>
+                        <th>Created Date</th>
+                        <th>Updated Date</th>
+                        <th>CRUD</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @{
+                        var count = 0;
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            if(item.IsDeleted == true)
+                            {
+                                <tr style="color: red">
+                                    <th>@count</th>
+                                    <th>@item.Title</th>
+                                    <th>@item.Description</th>
+                                    <th>
+                                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+                                            <div class="icon-box icon-box-pink">
+                                                <div class="icon">@Html.Raw(item.IconUrl)</div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th>@item.CreatedDate.ToString("hh/mm  dd/MM/yyyy")</th>
+                                    <th>@item.UpdatedDate.ToString("hh/mm  dd/MM/yyyy")</th>
+                                    <th>
+                                        <div class="card-header py-3 mb-4 mt-3">
+                                            <a asp-action="Update" asp-route-id="@item.Id"><button type="button" class="btn btn-warning">Update</button></a>
+                                            <a asp-action="Detail" asp-route-id="@item.Id"><button type="button" class="btn btn-success">Detail</button></a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger">Delete</button></a>
+                                        </div>
+                                    </th>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th>@count</th>
+                                    <th>@item.Title</th>
+                                    <th>@item.Description</th>
+                                    <th>
+                                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+                                            <div class="icon-box icon-box-pink">
+                                                <div class="icon">@Html.Raw(item.IconUrl)</div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th>@item.CreatedDate.ToString("hh/mm  dd/MM/yyyy")</th>
+                                    <th>@item.UpdatedDate.ToString("hh/mm  dd/MM/yyyy")</th>
+                                    <th>
+                                        <div class="card-header py-3 mb-4 mt-3">
+                                            <a asp-action="Update" asp-route-id="@item.Id"><button type="button" class="btn btn-warning">Update</button></a>
+                                            <a asp-action="Detail" asp-route-id="@item.Id"><button type="button" class="btn btn-success">Detail</button></a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger">Delete</button></a>
+                                        </div>
+                                    </th>
+                                </tr>
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            count++;
+
+                            <tr>
+                                <th>@count</th>
+                                <th>@item.Title</th>
+                                <th>@item.Description</th>
+                                <th>
+                                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+                                        <div class="icon-box icon-box-pink">
+                                            <div class="icon">@Html.Raw(item.IconUrl)</div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>@item.CreatedDate.ToString("hh/mm  dd/MM/yyyy")</th>
+                                <th>@item.UpdatedDate.ToString("hh/mm  dd/MM/yyyy")</th>
+                                <th>
+                                    <div class="card-header py-3 mb-4 mt-3">
+                                        <a asp-action="Update" asp-route-id="@item.Id"><button type="button" class="btn btn-warning">Update</button></a>
+                                        <a asp-action="Detail" asp-route-id="@item.Id"><button type="button" class="btn btn-success">Detail</button></a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
